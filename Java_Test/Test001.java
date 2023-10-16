@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-    파스칼의 삼각형 
+    Test001 
+    : 알고리즘 - 파스칼의 삼각형 관련 출력해보기
 */
+
 public class Test001
 {
+
+    // main 메소드
     public static void main(String args[])
     {
         List<Integer> arr = getRow(33);
@@ -26,7 +30,9 @@ public class Test001
         
     }
 
-     public static List<Integer> getRow(int rowIndex) {
+    // getRow - 파스칼의 삼각형 
+    public static List<Integer> getRow(int rowIndex) 
+    {
 
         List<Integer> result = null;
 
