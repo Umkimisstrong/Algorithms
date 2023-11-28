@@ -56,14 +56,16 @@ public class Test004
         // 정렬
         for(int i = 0; i<wholeArrNums.length; i++)
         {
-            if(wholeArrNums[i] > wholeArrNums[i+1] 
-                && 
-                i != wholeArrNums.length-1)
+            if ( i != wholeArrNums.length-1)
             {
-                int temp = wholeArrNums[i+1];
-                wholeArrNums[i+1] = wholeArrNums[i];
-                wholeArrNums[i] = temp;
+                if(wholeArrNums[i] > wholeArrNums[i+1])
+                {
+                    int temp = wholeArrNums[i+1];
+                    wholeArrNums[i+1] = wholeArrNums[i];
+                    wholeArrNums[i] = temp;
+                }
             }
+            
         }
 
 
@@ -77,8 +79,8 @@ public class Test004
             //      
 
             //                                                  -- (length/2 -1), (length / 2)
-
-            result = (wholeArrNums[wholeLength/2 - 1] + wholeArrNums[wholeLength/2] ) / 2;
+            Double sum = (wholeArrNums[wholeLength/2 - 1] + wholeArrNums[wholeLength/2] ) * 1.00000;
+            result =  sum / 2  * 1.00000;
 
         }
         // 배열의 갯수가 홀수개라면 
@@ -90,8 +92,9 @@ public class Test004
             //              7 / i = 0, 1, 2, 3, 4, 5, 6       -- 3
             //                                  
 
-            //                                                -- (length+1)/2 - 1
-            result = wholeArrNums[(wholeLength+1) / 2 -1];
+            //            
+            Double sum = wholeArrNums[(wholeLength+1) / 2 -1]  * 1.00000;
+            result = sum * 1.00000;
 
         }
 
@@ -106,13 +109,15 @@ public class Test004
 
         int [] arr1 = new int[2];
         arr1[0] = 1;
-        arr1[1] = 3;
+        arr1[1] = 2;
 
 
-        int [] arr2 = new int[1];
-        arr2[0] = 2;
+        int [] arr2 = new int[2];
+        arr2[0] = 3;
+        arr2[1] = 4;
 
         double result = obj.findMedianSortedArrays(arr1, arr2);
+        System.out.println(Double.toString(result));
     }
 
      
