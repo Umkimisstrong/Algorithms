@@ -22,85 +22,39 @@ public class Test010
 {
     public boolean isMatch(String s, String p)
     {
-        boolean result = 0;
-
-        
-
-        switch (s.equals(p))
-        {
-            // 같은 경우
-            case true:
-                result = true;
-                break;
-
-            // 다른 경우
-            case false:
-
-            // 비교문자열 안에 . 또는 * 가 아예 없는 경우
-            if(     p.indexOf("*") == -1 
-               &&   p.indexOf((".") == -1)
-                 )
-            {
-                result = false;
-            }
-            else
-            {
-                if(p.equals("*"))
-                    result = true;  // 비교군 * 인경우
-                else if(s.length() == 1 && p.equals("."))   // 비교대상이 어떤문자던 1개인 경우와 비교군이 . 인경우
-                    result = true;
-                else
-                {
-                    
-                    // 1. 문자열 각각 담기 위한 배열 생성
-                    String [] arr_S = new String [s.length()];
-                    for(int i = 0; i<s.length(); i++)
-                    {
-                        arr_S[i] = Character.toString(s.charAt(i));
-                    }
-
-                    String [] arr_P = new String [p.length()];
-                    for(int i = 0; i<s.length(); i++)
-                    {
-                        arr_P[i] = Character.toString(P.charAt(i));
-                    }
-
-                    
-                    // 두 문자열의 길이가 같은 경우 그냥 비교
-                    for(int i = 0; i<s.length(); i++)
-                    {
-                        if(arr_P[i].equals("."))
-                        {
-                            result = true;
-                        }
-                        else
-                        {
-                            if(arr_S[i].equals(arr_P[i]))
-                            {
-                                result = true;
-                            }
-                            else
-                            {
-                                result = false;
-                            }
-                        }
-                    }
-
-                    // 두 문자열의 길이가 다른 경우 
-                }    
-                
-
-
-
-            }
-
-                break;
+        int rows = s.length();
+        int columns = p.length();
+        /// Base conditions
+        if (rows == 0 && columns == 0) {
+            return true;
         }
-
-
-
-
-        return result;
+        if (columns == 0) {
+            return false;
+        }
+        // DP array
+        boolean[][] dp = new boolean[rows + 1][columns + 1];
+        // Empty string and empty pattern are a match
+        dp[0][0] = true;
+        // Deals with patterns with *
+        for (int i = 2; i < columns + 1; i++) {
+            if (p.charAt(i - 1) == '*') {
+                dp[0][i] = dp[0][i - 2];
+            }
+        }
+        // For remaining characters
+        for (int i = 1; i < rows + 1; i++) {
+            for (int j = 1; j < columns + 1; j++) {
+                if (s.charAt(i - 1) == p.charAt(j - 1) || p.charAt(j - 1) == '.') {
+                    dp[i][j] = dp[i - 1][j - 1];
+                } else if (j > 1 && p.charAt(j - 1) == '*') {
+                    dp[i][j] = dp[i][j - 2];
+                    if (p.charAt(j - 2) == '.' || p.charAt(j - 2) == s.charAt(i - 1)) {
+                        dp[i][j] = dp[i][j] | dp[i - 1][j];
+                    }
+                }
+            }
+        }
+        return dp[rows][columns];
     }
    
     // main 메소드
@@ -108,7 +62,10 @@ public class Test010
     {
         Test010 obj = new Test010();
         
-       
+        System.out.println(obj.isMatch("aa", "a*") ? "true ": "false");
+        System.out.println(obj.isMatch("aa", "aa") ? "true ": "false");
+        System.out.println(obj.isMatch("ab", ".*") ? "true ": "false");
+        System.out.println(obj.isMatch("aa", "ab") ? "true ": "false");
 
         
     }
