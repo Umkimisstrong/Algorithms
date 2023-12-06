@@ -24,23 +24,30 @@ public class Test010
     {
         int rows = s.length();
         int columns = p.length();
+
+
         /// Base conditions
         if (rows == 0 && columns == 0) {
             return true;
         }
-        if (columns == 0) {
+        if (columns == 0)
+        {
             return false;
         }
+
         // DP array
         boolean[][] dp = new boolean[rows + 1][columns + 1];
+
         // Empty string and empty pattern are a match
         dp[0][0] = true;
+
         // Deals with patterns with *
         for (int i = 2; i < columns + 1; i++) {
             if (p.charAt(i - 1) == '*') {
                 dp[0][i] = dp[0][i - 2];
             }
         }
+        
         // For remaining characters
         for (int i = 1; i < rows + 1; i++) {
             for (int j = 1; j < columns + 1; j++) {
