@@ -6,15 +6,12 @@ package Java_Test;
 */
 
 
-public class Test012
+public class Test013
 {
 
     // main 메소드
     public static void main(String args[])
     {
-        Test013 obj = new Test013();
-        
-       
       
         
     }

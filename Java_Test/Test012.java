@@ -1,5 +1,8 @@
 package Java_Test;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 /*
     Test012
     : 알고리즘 - 정수형을 로마형으로 바꾸기 Int to Roman
@@ -38,221 +41,52 @@ public class Test012
         System.out.println(obj.intToRoman(58));
         System.out.println(obj.intToRoman(1994));
 
-      
+        /*
+            III
+            LVIII  
+            MCMXCIV
+        */
         
     }
     
-    public String intToRoman(int num)
+    
+    
+    public String repeat(String s, int n) 
     {
-        String result = "";
-
-
-        String IntegerFlags = "0";
-       
-        if(num >= 1000)
-        {
-            IntegerFlags = "3";
+        if(s == null) {
+            return null;
         }
-        else if(num >= 100 && num < 1000)
-        {
-            IntegerFlags = "2";
+        final StringBuilder sb = new StringBuilder();
+        for(int i = 0; i < n; i++) {
+            sb.append(s);
         }
-        else if(num >= 10 && num < 100)
-        {
-            IntegerFlags = "1";
-        }
-        
-        switch (IntegerFlags) {
-            case "0":
-                result = intToRomanForOneLength(num);
-                break;
-
-            case "1" :
-                result = intToRomanForTwoLength(num);
-                break;
-
-            case "2" :
-                result = intToRomanForThreeLength(num);
-                break;
-
-            case "3" :
-                result = intToRomanForFourLength(num);
-                break;
-
-            default:
-                break;
-        }
-        
-        return result;
+        return sb.toString();
     }
 
-    // 1의자리 메소드
-    public String intToRomanForOneLength(int num)
+    public String intToRoman(int Int)
     {
-        String result = "";
-        int divided_five = num / 5;
-        int restOfFive = num % 5;
-        if(num == 9)
-                {
-                    result = "IX";
-                }
-                else if(num == 4)
-                {
-                    result = "IV";
-                }
-                else
-                {
-                    if(divided_five == 1)
-                    {
-                        result += "V";
-                    }
+         LinkedHashMap<String, Integer> roman_numerals = new LinkedHashMap<String, Integer>();
+         roman_numerals.put("M", 1000);
+         roman_numerals.put("CM", 900);
+         roman_numerals.put("D", 500);
+         roman_numerals.put("CD", 400);
+         roman_numerals.put("C", 100);
+         roman_numerals.put("XC", 90);
+         roman_numerals.put("L", 50);
+         roman_numerals.put("XL", 40);
+         roman_numerals.put("X", 10);
+         roman_numerals.put("IX", 9);
+         roman_numerals.put("V", 5);
+         roman_numerals.put("IV", 4);
+         roman_numerals.put("I", 1);
 
-                    if(restOfFive > 0)
-                    {
-                        for(int i = 0; i<restOfFive; i++)
-                        {
-                            result+= "I";
-                        }
-                    }
-                }
-        return result;
-    }
-
-    // 10의자리 메소드
-    public String intToRomanForTwoLength(int num)
-    {
-        String result = "";
-
-        int divided_fifty = num / 50;
-        int restOfFifty = num % 50;
-        
-        if(num == 90)
-        {
-            result = "XC";
-        }
-        else if(num == 40)
-        {
-            result = "XL";
-        }
-        else if (num == 10)
-        {
-            result = "X";
-        }
-        else
-        {
-            if(divided_fifty == 1)
-            {
-                result += "L";
-            }
-
-            if(restOfFifty > 0)
-            {
-                
-                    int divided_ten = restOfFifty / 10;
-                    int restOfTen = restOfFifty % 10;
-
-                    if(divided_ten>0)
-                    {
-                       
-                        for(int i = 0; i<divided_ten; i++)
-                        {
-                                result+= "X";
-                        }
-                    }
-
-                    // 자투리를 10으로 나눈 나머지가 0보다 크면 다시 그 수로 다시 5를 확인
-                    if(restOfTen>0)
-                    {
-                         result += intToRomanForOneLength(restOfTen);
-                    }
-                            
-            }
-        }
-
-        return result;
-    }
-   
-    // 100의자리 메소드
-    public String intToRomanForThreeLength(int num)
-    {
-        String result = "";
-        // 3자리수
-        int divided_fiveHund = num / 500;
-        int restOfFiveHund = num % 500;
-        
-        if(num == 100)
-        {
-            result = "C";
-        }
-        else if(num == 400)
-        {
-            result = "CD";
-        }
-        else if(num == 900)
-        {
-            result = "CM";
-        }
-        else
-        {
-            if(divided_fiveHund == 1)
-            {
-                result += "D";
-            }
-
-            if(restOfFiveHund > 0)
-            {
-                int divided_Hund = restOfFiveHund / 100;
-                if(divided_Hund>0)
-                {
-                    for(int i = 0; i<divided_Hund; i++)
-                    {
-                        result += "C";
-                    }
-                }
-
-                int restOfHund = restOfFiveHund % 100;
-                if(restOfHund>0)
-                {
-                    result += intToRomanForTwoLength(restOfHund);
-                }
-            }
-        }
-
-        return result;
-    }
-
-    // 1000의자리 메소드
-    public String intToRomanForFourLength(int num)
-    {
-        String result = "";
-        // 3자리수
-        int divided_Thousand = num / 1000;
-        int restOfThousand = num % 1000;
-        
-        if(divided_Thousand > 0)
-        {
-            for(int i = 0; i<divided_Thousand; i++)
-            {
-                result += "M";
-            }
-        }
-
-        if(restOfThousand>0)
-        {
-            if(restOfThousand >=100)
-            {
-                result += intToRomanForThreeLength(restOfThousand);
-            }
-            else if(restOfThousand >=10 && restOfThousand < 100)
-            {
-                result += intToRomanForTwoLength(restOfThousand);
-            }
-            else if(restOfThousand >= 1 && restOfThousand < 10)
-            {
-                result += intToRomanForOneLength(restOfThousand);
-            }
-        }
-        
-        return result;
+         String res = "";
+         for(Map.Entry<String, Integer> entry : roman_numerals.entrySet())
+         {
+           int matches = Int/entry.getValue();
+           res += repeat(entry.getKey(), matches);
+           Int = Int % entry.getValue();
+         }
+         return res;
     }
 }
