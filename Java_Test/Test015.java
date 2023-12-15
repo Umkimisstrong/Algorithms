@@ -1,7 +1,10 @@
 package Java_Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /*
@@ -19,13 +22,52 @@ import java.util.Map;
 public class Test015
 {
 
-    public ArrayList<ArrayList<Integer>> threeSum(int [] nums)
+    public List<List<Integer>> threeSum(int [] nums)
     {
-        ArrayList<ArrayList<Integer>> result = new ArrayList<ArrayList<Integer>>();
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
 
+        Arrays.sort(nums);
 
+        for(int i =0; i<nums.length-2; i++)
+        {
+            if(
+                i>0 
+                &&
+                nums[i] == nums[i-1]
+              )
+              continue;
 
-        
+              int left = i + 1;
+              int right = nums.length - 1;
+
+              while(left < right)
+              {
+                    int sum = nums[left] + nums[right] + nums[i];
+
+                    if( sum == 0)   // 합이0인경우
+                    {
+                        result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+                        left++;
+                        right--;
+                        while(nums[left] == nums[left-1] && left < right)
+                        {
+                            left++;
+                        }
+                        while(nums[right] == nums[right+1] && left < right)
+                        {
+                            right--;
+                        }
+                    }
+                    else if(sum > 0)
+                    {
+                        right--;
+                    }
+                    else
+                    {
+                        left++;
+                    }
+              }
+        }
 
         
         return result;
@@ -35,7 +77,29 @@ public class Test015
     {
         Test015 obj = new Test015();
 
-        System.out.println("");
+        int [] nums = {-1, 0, 1, 2, -1, -4};
+        List<List<Integer>> result = obj.threeSum(nums);
+
+        StringBuilder sb = new StringBuilder();
+        for(List<Integer> list : result)
+        {
+            int index = 0;
+            sb.append("[ ");
+            for(int num : list)
+            {
+                sb.append(Integer.toString(num));
+                if(index != list.size()-1)
+                {
+                    sb.append(", ");
+                }
+                index++;
+            }
+            sb.append(" ]");
+
+        }
+
+        String strResult = sb.toString();
+        System.out.println(strResult);
         
     }
     
