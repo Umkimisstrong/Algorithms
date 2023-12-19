@@ -39,7 +39,8 @@ public class Test016
     {
         int result = 0;
 
-
+        if(nums.length < 3)                 
+            result = 0;
         
         return result;
     }
