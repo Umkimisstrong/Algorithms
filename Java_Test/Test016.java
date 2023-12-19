@@ -27,7 +27,11 @@ public class Test016
     public static void main(String args[])
     {
         Test016 obj = new Test016();
-        System.out.println();
+
+        int [] nums = {-1, 2, 1, -4};
+        int target = 1;
+
+        System.out.println(obj.threeSumClosest(nums, target));
         
     }
     
