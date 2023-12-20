@@ -31,7 +31,7 @@ public class Test016
         int [] nums = {-1, 2, 1, -4};
         int target = 1;
 
-        System.out.println(obj.threeSumClosest(nums, target));
+        System.out.println(Integer.toString(obj.threeSumClosest(nums, target)));
         
     }
     
@@ -42,6 +42,33 @@ public class Test016
         if(nums.length < 3)                 
             result = 0;
         
+        Arrays.sort(nums);
+        int I = nums.length;
+        int ans = nums[0] + nums[1] + nums[2];
+
+        for(int i = 0; i<I-2; i++)
+        {
+            int j = i+1, k = I-1;
+            while(j<k)
+            {
+                int sum = nums[i] + nums[j] + nums[k];
+                int dis = Math.abs(sum-target); 
+                
+                if(dis < Math.abs(ans-target))
+                    ans = sum;
+
+                if(sum == target)
+                    return target;
+                
+                if(sum>target)
+                    k--;
+                else
+                    j++;
+                
+            }
+        }
+
+        result = ans;
         return result;
     }
    
