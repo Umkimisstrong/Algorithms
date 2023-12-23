@@ -17,6 +17,8 @@ import java.util.Map;
                4 ghi / 5 - jkl / 6 - mno
                7 pqrs / 8 - tuv / 9 - wxyz
                * - + / 0 " " / # ↑
+               --> 휴대폰을 상상한다.
+      
 
 */      
 
