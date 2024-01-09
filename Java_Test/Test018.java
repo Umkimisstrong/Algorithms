@@ -32,6 +32,11 @@ public class Test018
     }
 
     
-   
+    public String methodName ()
+    {
+        String result = "";
+
+        return result;
+    }
    
 }
